@@ -72,7 +72,7 @@ export function Reviews({ reviews, rating, reviewsCount }: ReviewsProps) {
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Avatar className="w-10 h-10">
-                  <AvatarFallback className="bg-sky-100 text-sky-700 font-bold text-sm">
+                  <AvatarFallback className="bg-violet-100 text-violet-700 font-bold text-sm">
                     {review.avatar}
                   </AvatarFallback>
                 </Avatar>

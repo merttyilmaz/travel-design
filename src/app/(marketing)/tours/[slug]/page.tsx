@@ -18,9 +18,9 @@ export default function TourDetailPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-6">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-4">
-            <a href="/" className="hover:text-sky-500 transition-colors">Home</a>
+            <a href="/" className="hover:text-violet-500 transition-colors">Home</a>
             <ChevronRight className="w-3 h-3" />
-            <a href="/tours" className="hover:text-sky-500 transition-colors">Tours</a>
+            <a href="/tours" className="hover:text-violet-500 transition-colors">Tours</a>
             <ChevronRight className="w-3 h-3" />
             <span className="text-gray-600 font-medium truncate max-w-xs">{tour.title}</span>
           </nav>
@@ -31,7 +31,7 @@ export default function TourDetailPage() {
 
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-1.5 text-sm text-gray-500">
-              <MapPin className="w-4 h-4 text-sky-500" />
+              <MapPin className="w-4 h-4 text-violet-500" />
               <span>{tour.location}</span>
             </div>
             <div className="flex items-center gap-1.5">

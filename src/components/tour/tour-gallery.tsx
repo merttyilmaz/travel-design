@@ -26,7 +26,8 @@ export function TourGallery({ images, title }: TourGalleryProps) {
           alt={`${title} — photo ${activeIndex + 1}`}
           fill
           className="object-cover transition-all duration-500"
-          priority
+          priority={activeIndex === 0}
+          loading={activeIndex === 0 ? "eager" : "lazy"}
           sizes="(max-width: 768px) 100vw, 65vw"
         />
 
@@ -80,7 +81,7 @@ export function TourGallery({ images, title }: TourGalleryProps) {
             onClick={() => setActiveIndex(i)}
             className={`relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 transition-all duration-200 ${
               i === activeIndex
-                ? "ring-2 ring-sky-500 ring-offset-2 opacity-100"
+                ? "ring-2 ring-violet-500 ring-offset-2 opacity-100"
                 : "opacity-60 hover:opacity-90 hover:ring-2 hover:ring-gray-300 hover:ring-offset-1"
             }`}
           >

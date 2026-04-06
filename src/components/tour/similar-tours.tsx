@@ -25,7 +25,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
         </div>
         <a
           href="/tours"
-          className="flex items-center gap-1.5 text-sm font-semibold text-sky-600 hover:text-sky-700 transition-colors"
+          className="flex items-center gap-1.5 text-sm font-semibold text-violet-600 hover:text-violet-700 transition-colors"
         >
           View all
           <ArrowRight className="w-4 h-4" />
@@ -56,7 +56,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div className="absolute top-3 left-3">
-                  <Badge className="bg-sky-500 text-white border-0 text-xs font-bold shadow-sm">
+                  <Badge className="bg-violet-500 text-white border-0 text-xs font-bold shadow-sm">
                     -{discount}%
                   </Badge>
                 </div>
@@ -64,7 +64,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
 
               {/* Content */}
               <div className="p-4 space-y-3">
-                <p className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2 group-hover:text-sky-600 transition-colors">
+                <p className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2 group-hover:text-violet-600 transition-colors">
                   {tour.title}
                 </p>
 
@@ -88,7 +88,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
                       ${tour.originalPrice.toLocaleString()}
                     </span>
                   </div>
-                  <span className="text-xs font-medium text-sky-600">/ person</span>
+                  <span className="text-xs font-medium text-violet-600">/ person</span>
                 </div>
               </div>
             </a>

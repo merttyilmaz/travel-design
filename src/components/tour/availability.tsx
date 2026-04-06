@@ -35,7 +35,7 @@ export function Availability({ departures }: AvailabilityProps) {
 
       {/* Controls */}
       <div className="flex flex-wrap gap-3">
-        <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-sky-200 text-sky-700 bg-sky-50 text-sm font-semibold hover:bg-sky-100 transition-colors">
+        <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-violet-200 text-violet-700 bg-violet-50 text-sm font-semibold hover:bg-violet-100 transition-colors">
           <Users className="w-4 h-4" />
           Private Tour
           <ChevronDown className="w-3.5 h-3.5 ml-0.5 opacity-60" />
@@ -57,7 +57,7 @@ export function Availability({ departures }: AvailabilityProps) {
             </span>
             <button
               onClick={() => setTravelers(Math.min(40, travelers + 1))}
-              className="w-7 h-7 rounded-full bg-sky-500 hover:bg-sky-600 text-base font-semibold text-white flex items-center justify-center transition-colors leading-none"
+              className="w-7 h-7 rounded-full bg-violet-500 hover:bg-violet-600 text-base font-semibold text-white flex items-center justify-center transition-colors leading-none"
             >
               +
             </button>
@@ -77,8 +77,8 @@ export function Availability({ departures }: AvailabilityProps) {
               onClick={() => setSelectedMonth(month)}
               className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all ${
                 selectedMonth === month
-                  ? "bg-sky-500 text-white border-sky-500 shadow-sm shadow-sky-200"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-sky-300 hover:text-sky-600"
+                  ? "bg-violet-500 text-white border-violet-500 shadow-sm shadow-violet-200"
+                  : "bg-white text-gray-600 border-gray-200 hover:border-violet-300 hover:text-violet-600"
               }`}
             >
               {month}
@@ -95,11 +95,11 @@ export function Availability({ departures }: AvailabilityProps) {
         {departures.map((dep) => (
           <div
             key={dep.id}
-            className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-gray-100 rounded-2xl p-5 bg-white hover:border-sky-200 hover:shadow-sm transition-all cursor-pointer"
+            className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-gray-100 rounded-2xl p-5 bg-white hover:border-violet-200 hover:shadow-sm transition-all cursor-pointer"
           >
             <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-2xl bg-sky-50 flex items-center justify-center shrink-0">
-                <Calendar className="w-5 h-5 text-sky-500" />
+              <div className="w-11 h-11 rounded-2xl bg-violet-50 flex items-center justify-center shrink-0">
+                <Calendar className="w-5 h-5 text-violet-500" />
               </div>
               <div>
                 <div className="flex items-center gap-2 text-sm font-semibold text-gray-900 mb-1">
@@ -112,7 +112,7 @@ export function Availability({ departures }: AvailabilityProps) {
                   className={`text-xs font-medium ${
                     dep.spotsLeft <= 5
                       ? "border-red-200 text-red-600 bg-red-50"
-                      : "border-sky-200 text-sky-600 bg-sky-50"
+                      : "border-violet-200 text-violet-600 bg-violet-50"
                   }`}
                 >
                   {dep.spotsLeft <= 5 ? "⚡ " : ""}{dep.spotsLeft} spots remaining
@@ -130,7 +130,7 @@ export function Availability({ departures }: AvailabilityProps) {
               </div>
               <Button
                 size="sm"
-                className="bg-sky-500 hover:bg-sky-600 text-white rounded-xl px-5 h-10 font-semibold shadow-sm shadow-sky-200 shrink-0"
+                className="bg-violet-500 hover:bg-violet-600 text-white rounded-xl px-5 h-10 font-semibold shadow-sm shadow-violet-200 shrink-0"
               >
                 Book Now
               </Button>

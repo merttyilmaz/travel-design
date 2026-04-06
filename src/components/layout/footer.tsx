@@ -26,11 +26,11 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2">
             <a href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-violet-500 rounded-lg flex items-center justify-center">
                 <Zap className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-lg text-white">
-                Harmoni<span className="text-sky-400">Travel</span>
+                Harmoni<span className="text-violet-400">Travel</span>
               </span>
             </a>
             <p className="text-sm text-gray-400 mb-5 leading-relaxed">
@@ -39,15 +39,15 @@ export function Footer() {
             </p>
             <div className="space-y-2 text-sm text-gray-400">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-sky-400 shrink-0" />
+                <MapPin className="w-4 h-4 text-violet-400 shrink-0" />
                 <span>Istanbul, Turkey</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-sky-400 shrink-0" />
+                <Phone className="w-4 h-4 text-violet-400 shrink-0" />
                 <span>+90 212 000 0000</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-sky-400 shrink-0" />
+                <Mail className="w-4 h-4 text-violet-400 shrink-0" />
                 <span>hello@harmonitravel.com</span>
               </div>
             </div>
@@ -62,7 +62,7 @@ export function Footer() {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-sm text-gray-400 hover:text-sky-400 transition-colors"
+                      className="text-sm text-gray-400 hover:text-violet-400 transition-colors"
                     >
                       {link}
                     </a>
@@ -83,7 +83,7 @@ export function Footer() {
               <a
                 key={i}
                 href="#"
-                className="text-gray-500 hover:text-sky-400 transition-colors"
+                className="text-gray-500 hover:text-violet-400 transition-colors"
               >
                 <Icon className="w-4 h-4" />
               </a>

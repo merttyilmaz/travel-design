@@ -26,8 +26,8 @@ const MetaItem = ({
   value: string;
 }) => (
   <div className="flex items-center gap-3.5 py-4 px-5">
-    <div className="w-10 h-10 rounded-2xl bg-sky-50 flex items-center justify-center shrink-0">
-      <Icon className="w-4.5 h-4.5 text-sky-500" strokeWidth={2} />
+    <div className="w-10 h-10 rounded-2xl bg-violet-50 flex items-center justify-center shrink-0">
+      <Icon className="w-4.5 h-4.5 text-violet-500" strokeWidth={2} />
     </div>
     <div className="min-w-0">
       <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-0.5">

@@ -14,11 +14,11 @@ export function Header() {
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#b796e0" }}>
               <Zap className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-lg text-gray-900 hidden sm:block">
-              Harmoni<span className="text-sky-500">Travel</span>
+              Harmoni<span style={{ color: "#b796e0" }}>Travel</span>
             </span>
           </a>
 
@@ -39,7 +39,7 @@ export function Header() {
               <a
                 key={item}
                 href="#"
-                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-sky-600 hover:bg-gray-50 rounded-md transition-colors"
+                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-violet-600 hover:bg-gray-50 rounded-md transition-colors"
               >
                 {item}
               </a>
@@ -51,13 +51,13 @@ export function Header() {
             <Button
               variant="outline"
               size="sm"
-              className="hidden md:flex border-sky-500 text-sky-600 hover:bg-sky-50"
+              className="hidden md:flex border-violet-500 text-violet-600 hover:bg-violet-50"
             >
               Sign In
             </Button>
             <Button
               size="sm"
-              className="hidden md:flex bg-sky-500 hover:bg-sky-600 text-white"
+              className="hidden md:flex bg-violet-500 hover:bg-violet-600 text-white"
             >
               Register
             </Button>
@@ -93,7 +93,7 @@ export function Header() {
             <a
               key={item}
               href="#"
-              className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-sky-600 hover:bg-gray-50 rounded-md"
+              className="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-violet-600 hover:bg-gray-50 rounded-md"
             >
               {item}
             </a>
@@ -102,13 +102,13 @@ export function Header() {
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 border-sky-500 text-sky-600"
+              className="flex-1 border-violet-500 text-violet-600"
             >
               Sign In
             </Button>
             <Button
               size="sm"
-              className="flex-1 bg-sky-500 hover:bg-sky-600 text-white"
+              className="flex-1 bg-violet-500 hover:bg-violet-600 text-white"
             >
               Register
             </Button>

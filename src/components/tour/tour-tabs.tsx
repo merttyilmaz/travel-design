@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Check, X } from "lucide-react";
@@ -45,34 +46,44 @@ const tabItems = (reviewsCount: number) => [
 ];
 
 export function TourTabs({ tour }: TourTabsProps) {
+  const [activeTab, setActiveTab] = useState("overview");
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    document.getElementById("tour-tabs-card")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-      <Tabs defaultValue="overview">
-        {/* Tab bar */}
-        <div className="px-4 pt-5 pb-0">
-          <TabsList className="flex w-full bg-gray-100 rounded-lg p-1 h-auto gap-1">
-            {tabItems(tour.reviewsCount).map((tab) => (
-              <TabsTrigger
-                key={tab.value}
-                value={tab.value}
-                className="
-                  flex-1 py-3 rounded-md text-sm font-medium whitespace-nowrap transition-all duration-150
-                  text-gray-500 bg-transparent border-0 shadow-none
-                  hover:bg-muted/60 hover:text-gray-800
-                  data-[state=active]:bg-white data-[state=active]:text-sky-600
-                  data-[state=active]:font-semibold data-[state=active]:shadow-sm
-                "
-              >
-                {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+    // No overflow-hidden — would break sticky positioning of the tab header
+    <div id="tour-tabs-card" className="bg-white rounded-2xl border border-gray-100 shadow-sm scroll-mt-20">
+      <Tabs value={activeTab} onValueChange={handleTabChange}>
+
+        {/* Sticky tab header — inside the card, inherits top radius */}
+        <div className="sticky top-16 z-40 bg-white border-b border-gray-100 rounded-t-2xl">
+          <div className="overflow-x-auto scrollbar-hide px-4 py-2">
+            <TabsList className="flex w-full min-w-max sm:min-w-0 bg-gray-100 rounded-lg p-1 !h-10 gap-1">
+              {tabItems(tour.reviewsCount).map((tab) => (
+                <TabsTrigger
+                  key={tab.value}
+                  value={tab.value}
+                  className="
+                    flex-1 h-8 px-4 rounded-md text-sm font-semibold whitespace-nowrap transition-all duration-150
+                    text-gray-600 bg-transparent border-0 shadow-none
+                    hover:bg-transparent hover:text-violet-500
+                    data-active:bg-violet-600 data-active:text-white data-active:shadow-sm
+                    data-active:hover:bg-violet-600 data-active:hover:text-white
+                  "
+                >
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
         </div>
 
         {/* Tab content */}
-        <div className="px-6 py-7">
+        <div className="p-6">
 
-          {/* Overview */}
           <TabsContent value="overview" className="mt-0 space-y-5 focus-visible:ring-0 outline-none">
             <p className="text-gray-600 leading-relaxed text-[15px]">
               {tour.description}
@@ -82,7 +93,7 @@ export function TourTabs({ tour }: TourTabsProps) {
                 <Badge
                   key={tag}
                   variant="outline"
-                  className="border-sky-200 text-sky-700 bg-sky-50 font-medium"
+                  className="border-violet-200 text-violet-700 bg-violet-50 font-medium"
                 >
                   {tag}
                 </Badge>
@@ -90,13 +101,12 @@ export function TourTabs({ tour }: TourTabsProps) {
             </div>
           </TabsContent>
 
-          {/* Highlights */}
           <TabsContent value="highlights" className="mt-0 focus-visible:ring-0 outline-none">
             <ul className="grid sm:grid-cols-2 gap-3">
               {tour.highlights.map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-sky-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3 h-3 text-sky-600" strokeWidth={2.5} />
+                  <div className="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3 h-3 text-violet-600" strokeWidth={2.5} />
                   </div>
                   <span className="text-sm text-gray-700 leading-relaxed">{item}</span>
                 </li>
@@ -104,12 +114,10 @@ export function TourTabs({ tour }: TourTabsProps) {
             </ul>
           </TabsContent>
 
-          {/* Itinerary */}
           <TabsContent value="itinerary" className="mt-0 focus-visible:ring-0 outline-none">
             <Itinerary days={tour.itinerary} />
           </TabsContent>
 
-          {/* Includes */}
           <TabsContent value="includes" className="mt-0 focus-visible:ring-0 outline-none">
             <div className="grid sm:grid-cols-2 gap-8">
               <div className="space-y-4">
@@ -145,12 +153,10 @@ export function TourTabs({ tour }: TourTabsProps) {
             </div>
           </TabsContent>
 
-          {/* Availability */}
           <TabsContent value="availability" className="mt-0 focus-visible:ring-0 outline-none">
             <Availability departures={tour.availability} />
           </TabsContent>
 
-          {/* Reviews */}
           <TabsContent value="reviews" className="mt-0 focus-visible:ring-0 outline-none">
             <Reviews
               reviews={tour.reviews}

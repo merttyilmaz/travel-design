@@ -32,14 +32,14 @@ export function Itinerary({ days }: ItineraryProps) {
           >
             <AccordionTrigger className="px-5 py-4 hover:no-underline hover:bg-gray-50 transition-colors group">
               <div className="flex items-center gap-4 text-left">
-                <div className="w-9 h-9 rounded-full bg-sky-500 text-white text-xs font-bold flex items-center justify-center shrink-0 shadow-sm shadow-sky-200">
+                <div className="w-9 h-9 rounded-full bg-violet-500 text-white text-xs font-bold flex items-center justify-center shrink-0 shadow-sm shadow-violet-200">
                   {day}
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-sky-500 uppercase tracking-widest mb-0.5">
+                  <p className="text-[10px] font-bold text-violet-500 uppercase tracking-widest mb-0.5">
                     Day {day}
                   </p>
-                  <p className="text-sm font-semibold text-gray-900 group-hover:text-sky-600 transition-colors">
+                  <p className="text-sm font-semibold text-gray-900 group-hover:text-violet-600 transition-colors">
                     {title}
                   </p>
                 </div>
