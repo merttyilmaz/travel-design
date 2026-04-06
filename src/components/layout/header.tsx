@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Zap, Menu, X } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Logo } from "./logo";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,14 +14,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#b796e0" }}>
-              <Zap className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-bold text-lg text-gray-900 hidden sm:block">
-              Harmoni<span style={{ color: "#b796e0" }}>Travel</span>
-            </span>
-          </a>
+          <Logo />
 
           {/* Search */}
           <div className="flex-1 max-w-md hidden md:block">

@@ -55,11 +55,11 @@ export function TourTabs({ tour }: TourTabsProps) {
 
   return (
     // No overflow-hidden — would break sticky positioning of the tab header
-    <div id="tour-tabs-card" className="bg-white rounded-2xl border border-gray-100 shadow-sm scroll-mt-20">
+    <div id="tour-tabs-card" className="bg-white rounded-2xl border border-gray-100 shadow-sm scroll-mt-[120px] md:scroll-mt-20">
       <Tabs value={activeTab} onValueChange={handleTabChange}>
 
         {/* Sticky tab header — inside the card, inherits top radius */}
-        <div className="sticky top-16 z-40 bg-white border-b border-gray-100 rounded-t-2xl">
+        <div className="sticky top-[112px] md:top-16 z-40 bg-white border-b border-gray-100 rounded-t-2xl w-full">
           <div className="overflow-x-auto scrollbar-hide px-4 py-2">
             <TabsList className="flex w-full min-w-max sm:min-w-0 bg-gray-100 rounded-lg p-1 !h-10 gap-1">
               {tabItems(tour.reviewsCount).map((tab) => (

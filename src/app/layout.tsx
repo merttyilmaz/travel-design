@@ -9,8 +9,19 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Harmoni Travel",
-  description: "Curated ecotourism experiences that connect you with nature and culture responsibly.",
+  title: {
+    default: "10 Day Eco Tourism Tour Turkey",
+    template: "%s | 10 Day Eco Tourism Tour Turkey",
+  },
+  description: "Curated travel experiences that connect you with the world's most remarkable places.",
+  icons: {
+    icon: "https://travelshopbooking.com/favicon.ico",
+  },
+  openGraph: {
+    siteName: "10 Day Eco Tourism Tour Turkey",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({
