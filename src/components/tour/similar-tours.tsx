@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Star, ArrowRight } from "lucide-react";
 
@@ -24,13 +23,13 @@ export function SimilarTours({ tours }: SimilarToursProps) {
           <h2 className="text-xl font-bold text-gray-900">You Might Also Like</h2>
           <p className="text-sm text-gray-500 mt-0.5">Explore more curated tours</p>
         </div>
-        <Link
-          href="/tours"
-          className="flex items-center gap-1.5 text-sm font-semibold text-violet-600 hover:text-violet-700 transition-colors"
+        <span
+          className="flex items-center gap-1.5 text-sm font-semibold text-gray-400 cursor-not-allowed"
+          title="Coming soon"
         >
           View all
           <ArrowRight className="w-4 h-4" />
-        </Link>
+        </span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -39,10 +38,9 @@ export function SimilarTours({ tours }: SimilarToursProps) {
             ((tour.originalPrice - tour.price) / tour.originalPrice) * 100
           );
           return (
-            <Link
+            <div
               key={tour.slug}
-              href={`/tours/${tour.slug}`}
-              className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+              className="group bg-white border border-gray-100 rounded-2xl overflow-hidden"
             >
               {/* Image */}
               <div className="relative aspect-[3/2] overflow-hidden bg-gray-100">
@@ -50,12 +48,9 @@ export function SimilarTours({ tours }: SimilarToursProps) {
                   src={tour.image}
                   alt={tour.title}
                   fill
-                  className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
+                  className="object-cover"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
-                {/* Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
                 <div className="absolute top-3 left-3">
                   <Badge className="bg-violet-500 text-white border-0 text-xs font-bold shadow-sm">
                     -{discount}%
@@ -65,7 +60,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
 
               {/* Content */}
               <div className="p-4 space-y-3">
-                <p className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2 group-hover:text-violet-600 transition-colors">
+                <p className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2">
                   {tour.title}
                 </p>
 
@@ -92,7 +87,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
                   <span className="text-xs font-medium text-violet-600">/ person</span>
                 </div>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>

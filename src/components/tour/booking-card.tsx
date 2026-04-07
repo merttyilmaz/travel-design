@@ -19,6 +19,14 @@ interface BookingCardProps {
   reviewsCount: number;
 }
 
+function scrollToAvailability() {
+  const el = document.getElementById("availability");
+  if (!el) return;
+  const offset = 128;
+  const y = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: y, behavior: "smooth" });
+}
+
 export function BookingCard({
   price,
   originalPrice,
@@ -117,7 +125,7 @@ export function BookingCard({
 
       {/* CTAs */}
       <div className="space-y-2">
-        <Button className="w-full bg-violet-600 hover:bg-violet-700 text-white h-12 font-medium rounded-lg text-base transition-colors">
+        <Button onClick={scrollToAvailability} className="w-full bg-violet-600 hover:bg-violet-700 text-white h-12 font-medium rounded-lg text-base transition-colors">
           <CalendarCheck className="w-4 h-4 mr-2" />
           Check Availability
         </Button>

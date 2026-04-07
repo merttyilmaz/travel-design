@@ -3,6 +3,19 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Images } from "lucide-react";
+import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
+import Download from "yet-another-react-lightbox/plugins/download";
+import Share from "yet-another-react-lightbox/plugins/share";
+import Captions from "yet-another-react-lightbox/plugins/captions";
+import Counter from "yet-another-react-lightbox/plugins/counter";
+import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+import "yet-another-react-lightbox/plugins/captions.css";
+import "yet-another-react-lightbox/plugins/counter.css";
 
 interface TourGalleryProps {
   images: string[];
@@ -11,16 +24,27 @@ interface TourGalleryProps {
 
 export function TourGallery({ images, title }: TourGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const prev = () =>
     setActiveIndex((i) => (i === 0 ? images.length - 1 : i - 1));
   const next = () =>
     setActiveIndex((i) => (i === images.length - 1 ? 0 : i + 1));
 
+  const slides = images.map((src, i) => ({
+    src,
+    title: `${title} — photo ${i + 1}`,
+    download: src,
+    share: { url: src, title: `${title} — photo ${i + 1}` },
+  }));
+
   return (
     <div className="space-y-3">
       {/* Main image */}
-      <div className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-[16/10] group shadow-sm">
+      <div
+        className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-[16/10] group shadow-sm cursor-zoom-in"
+        onClick={() => setLightboxOpen(true)}
+      >
         <Image
           src={images[activeIndex]}
           alt={`${title} — photo ${activeIndex + 1}`}
@@ -36,14 +60,14 @@ export function TourGallery({ images, title }: TourGalleryProps) {
 
         {/* Arrow controls */}
         <button
-          onClick={prev}
+          onClick={(e) => { e.stopPropagation(); prev(); }}
           className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-md opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-105"
           aria-label="Previous image"
         >
           <ChevronLeft className="w-4 h-4 text-gray-800" />
         </button>
         <button
-          onClick={next}
+          onClick={(e) => { e.stopPropagation(); next(); }}
           className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2.5 shadow-md opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-105"
           aria-label="Next image"
         >
@@ -61,7 +85,7 @@ export function TourGallery({ images, title }: TourGalleryProps) {
           {images.map((_, i) => (
             <button
               key={i}
-              onClick={() => setActiveIndex(i)}
+              onClick={(e) => { e.stopPropagation(); setActiveIndex(i); }}
               className={`rounded-full transition-all duration-200 ${
                 i === activeIndex
                   ? "w-5 h-1.5 bg-white"
@@ -95,6 +119,19 @@ export function TourGallery({ images, title }: TourGalleryProps) {
           </button>
         ))}
       </div>
+
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={slides}
+        index={activeIndex}
+        on={{ view: ({ index }) => setActiveIndex(index) }}
+        plugins={[Zoom, Thumbnails, Fullscreen, Slideshow, Download, Share, Captions, Counter]}
+        zoom={{ maxZoomPixelRatio: 4, zoomInMultiplier: 2 }}
+        thumbnails={{ position: "bottom", width: 80, height: 60, gap: 8 }}
+        captions={{ showToggle: true, descriptionTextAlign: "center" }}
+        counter={{ container: { style: { top: "unset", bottom: 0 } } }}
+      />
     </div>
   );
 }

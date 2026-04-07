@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BookingCard } from "@/components/tour/booking-card";
@@ -85,7 +85,7 @@ describe("BookingCard", () => {
 
   it("calculates the correct total price for 2 travelers", () => {
     render(<BookingCard {...defaultProps} />);
-    // 1272 × 2 = 2544 (appears in both breakdown row and Total line)
+    // 1272 × 2 = 2544
     expect(screen.getAllByText("$2,544").length).toBeGreaterThan(0);
   });
 
@@ -100,7 +100,7 @@ describe("BookingCard", () => {
     render(<BookingCard {...defaultProps} />);
     const plusBtn = screen.getByText("+");
     await user.click(plusBtn);
-    // 1272 × 3 = 3816 (appears in breakdown row and Total line)
+    // 1272 × 3 = 3816
     expect(screen.getAllByText("$3,816").length).toBeGreaterThan(0);
   });
 
@@ -120,9 +120,26 @@ describe("BookingCard", () => {
   });
 
   it("renders unfilled stars for a rating below 5", () => {
-    render(<BookingCard {...defaultProps} price={1272} originalPrice={1630} rating={3} reviewsCount={5} />);
-    // 3 filled + 2 unfilled — component renders 5 star icons total
+    render(<BookingCard {...defaultProps} rating={3} />);
     const stars = document.querySelectorAll(".lucide-star");
     expect(stars.length).toBe(5);
+  });
+
+  describe("Check Availability scroll", () => {
+    beforeEach(() => {
+      vi.stubGlobal("scrollTo", vi.fn());
+      const mockEl = { getBoundingClientRect: () => ({ top: 800 }), scrollIntoView: vi.fn() };
+      vi.spyOn(document, "getElementById").mockReturnValue(mockEl as unknown as HTMLElement);
+    });
+
+    it("scrolls to the availability section when Check Availability is clicked", async () => {
+      const user = userEvent.setup();
+      render(<BookingCard {...defaultProps} />);
+      await user.click(screen.getByText("Check Availability"));
+      expect(document.getElementById).toHaveBeenCalledWith("availability");
+      expect(window.scrollTo).toHaveBeenCalledWith(
+        expect.objectContaining({ behavior: "smooth" })
+      );
+    });
   });
 });

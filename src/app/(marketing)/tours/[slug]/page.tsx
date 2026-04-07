@@ -1,12 +1,12 @@
 import { MapPin, Star, ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { TourGallery } from "@/components/tour/tour-gallery";
 import { BookingCard } from "@/components/tour/booking-card";
 import { TourMeta } from "@/components/tour/tour-meta";
-import { TourTabs } from "@/components/tour/tour-tabs";
+import { TourContent } from "@/components/tour/tour-content";
 import { SimilarTours } from "@/components/tour/similar-tours";
+import { MobileBookingBar } from "@/components/tour/mobile-booking-bar";
 import { tour, similarTours } from "@/lib/mock-data";
 
 export default function TourDetailPage() {
@@ -19,16 +19,9 @@ export default function TourDetailPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-6">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-4">
-            <Link href="/" className="hover:text-violet-500 transition-colors">
-              Home
-            </Link>
+            <span>Home</span>
             <ChevronRight className="w-3 h-3" />
-            <Link
-              href="/tours"
-              className="hover:text-violet-500 transition-colors"
-            >
-              Tours
-            </Link>
+            <span>Tours</span>
             <ChevronRight className="w-3 h-3" />
             <span className="text-gray-600 font-medium truncate max-w-xs">
               {tour.title}
@@ -67,11 +60,11 @@ export default function TourDetailPage() {
       </div>
 
       <main className="flex-1">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8 space-y-8">
           {/* Hero: gallery + booking card */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
             <TourGallery images={tour.images} title={tour.title} />
-            <div className="lg:sticky lg:top-24">
+            <div className="hidden lg:block lg:sticky lg:top-24">
               <BookingCard
                 price={tour.price}
                 originalPrice={tour.originalPrice}
@@ -91,8 +84,8 @@ export default function TourDetailPage() {
             ageRange={tour.ageRange}
           />
 
-          {/* Tabs */}
-          <TourTabs tour={tour} />
+          {/* Content sections */}
+          <TourContent tour={tour} />
 
           {/* Similar tours — outside tabs */}
           <SimilarTours tours={similarTours} />
@@ -100,6 +93,13 @@ export default function TourDetailPage() {
       </main>
 
       <Footer />
+
+      <MobileBookingBar
+        price={tour.price}
+        originalPrice={tour.originalPrice}
+        rating={tour.rating}
+        reviewsCount={tour.reviewsCount}
+      />
     </div>
   );
 }

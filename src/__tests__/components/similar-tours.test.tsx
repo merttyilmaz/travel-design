@@ -55,10 +55,11 @@ describe("SimilarTours", () => {
     expect(screen.getByText("You Might Also Like")).toBeInTheDocument();
   });
 
-  it("renders a 'View all' link pointing to /tours", () => {
+  it("renders 'View all' as a non-navigating element (in construction)", () => {
     render(<SimilarTours tours={mockTours} />);
-    const viewAll = screen.getByText("View all").closest("a");
-    expect(viewAll).toHaveAttribute("href", "/tours");
+    const viewAll = screen.getByText("View all");
+    expect(viewAll.tagName).not.toBe("A");
+    expect(viewAll.closest("a")).toBeNull();
   });
 
   it("renders each tour title", () => {
@@ -67,14 +68,11 @@ describe("SimilarTours", () => {
     expect(screen.getByText("5 Days Pamukkale & Hierapolis")).toBeInTheDocument();
   });
 
-  it("links each tour card to the correct /tours/[slug] path", () => {
+  it("renders tour cards as non-navigating elements (in construction)", () => {
     render(<SimilarTours tours={mockTours} />);
-    const links = screen
-      .getAllByTestId("next-link")
-      .filter((l) => l.getAttribute("href")?.startsWith("/tours/"));
-    expect(links).toHaveLength(mockTours.length);
-    expect(links[0]).toHaveAttribute("href", "/tours/7-days-cappadocia");
-    expect(links[1]).toHaveAttribute("href", "/tours/5-days-pamukkale");
+    expect(screen.queryAllByTestId("next-link")).toHaveLength(0);
+    expect(screen.getByText("7 Days Cappadocia & Fairy Chimneys")).toBeInTheDocument();
+    expect(screen.getByText("5 Days Pamukkale & Hierapolis")).toBeInTheDocument();
   });
 
   it("shows the discounted price for each tour", () => {
@@ -103,8 +101,8 @@ describe("SimilarTours", () => {
     expect(screen.getByText("5 Days")).toBeInTheDocument();
   });
 
-  it("renders nothing when tours array is empty", () => {
-    const { container } = render(<SimilarTours tours={[]} />);
-    expect(container.querySelectorAll('[data-testid="next-link"]')).toHaveLength(1); // only "View all"
+  it("renders no tour cards when tours array is empty", () => {
+    render(<SimilarTours tours={[]} />);
+    expect(screen.queryByText("7 Days Cappadocia & Fairy Chimneys")).not.toBeInTheDocument();
   });
 });

@@ -117,14 +117,11 @@ export function Footer() {
             <div key={title}>
               <h4 className="text-white font-semibold text-sm mb-4">{title}</h4>
               <ul className="space-y-2.5">
-                {links.map(({ label, href }) => (
+                {links.map(({ label }) => (
                   <li key={label}>
-                    <Link
-                      href={href}
-                      className="text-sm text-slate-400 hover:text-purple-400 transition-colors"
-                    >
+                    <span className="text-sm text-slate-500 cursor-not-allowed" title="Coming soon">
                       {label}
-                    </Link>
+                    </span>
                   </li>
                 ))}
               </ul>

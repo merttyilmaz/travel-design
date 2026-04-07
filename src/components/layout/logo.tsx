@@ -14,7 +14,7 @@ export function Logo({ dark = false }: LogoProps) {
         width={150}
         height={36}
         unoptimized
-        className={dark ? "brightness-0 invert" : ""}
+        className={dark ? "brightness-0 invert" : undefined}
       />
     </Link>
   );

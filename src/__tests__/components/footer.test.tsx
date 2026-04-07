@@ -31,14 +31,15 @@ describe("Footer", () => {
     expect(screen.getByText("Support")).toBeInTheDocument();
   });
 
-  it("renders internal nav links as Next.js Link components", () => {
+  it("renders internal nav items as non-navigating elements (in construction)", () => {
     render(<Footer />);
-    const links = screen.getAllByTestId("next-link");
-    const hrefs = links.map((l) => l.getAttribute("href"));
-    expect(hrefs).toContain("/about");
-    expect(hrefs).toContain("/faqs");
-    expect(hrefs).toContain("/help-center");
-    expect(hrefs).toContain("/list-your-tour");
+    expect(screen.getByText("About Us")).toBeInTheDocument();
+    expect(screen.getByText("FAQs")).toBeInTheDocument();
+    // No next-link wrappers for internal nav items
+    const links = screen.queryAllByTestId("next-link");
+    // Only the logo "/" link remains — no nav page links
+    const internalHrefs = links.map((l) => l.getAttribute("href")).filter((h) => h?.startsWith("/") && h !== "/");
+    expect(internalHrefs).toHaveLength(0);
   });
 
   it("renders social links as plain anchors with target=_blank", () => {

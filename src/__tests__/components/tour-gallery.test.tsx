@@ -15,6 +15,29 @@ vi.mock("next/image", () => ({
   }) => <img src={src} alt={alt} className={className} />,
 }));
 
+vi.mock("yet-another-react-lightbox", () => ({
+  default: ({ open, close }: { open: boolean; close: () => void }) =>
+    open ? (
+      <div data-testid="lightbox">
+        <button onClick={close}>Close lightbox</button>
+      </div>
+    ) : null,
+}));
+
+vi.mock("yet-another-react-lightbox/plugins/zoom", () => ({ default: {} }));
+vi.mock("yet-another-react-lightbox/plugins/thumbnails", () => ({ default: {} }));
+vi.mock("yet-another-react-lightbox/plugins/fullscreen", () => ({ default: {} }));
+vi.mock("yet-another-react-lightbox/plugins/slideshow", () => ({ default: {} }));
+vi.mock("yet-another-react-lightbox/plugins/download", () => ({ default: {} }));
+vi.mock("yet-another-react-lightbox/plugins/share", () => ({ default: {} }));
+vi.mock("yet-another-react-lightbox/plugins/captions", () => ({ default: {} }));
+vi.mock("yet-another-react-lightbox/plugins/counter", () => ({ default: {} }));
+
+vi.mock("yet-another-react-lightbox/styles.css", () => ({}));
+vi.mock("yet-another-react-lightbox/plugins/thumbnails.css", () => ({}));
+vi.mock("yet-another-react-lightbox/plugins/captions.css", () => ({}));
+vi.mock("yet-another-react-lightbox/plugins/counter.css", () => ({}));
+
 const images = [
   "https://example.com/image1.jpg",
   "https://example.com/image2.jpg",
@@ -69,17 +92,6 @@ describe("TourGallery", () => {
     expect(screen.getByText("3 / 3")).toBeInTheDocument();
   });
 
-  it("jumps directly to an image when a thumbnail is clicked", async () => {
-    const user = userEvent.setup();
-    render(<TourGallery images={images} title="My Tour" />);
-    // Thumbnail buttons use aria-label via the dot-indicator naming convention; use index approach
-    const thumbnails = screen
-      .getAllByRole("button")
-      .filter((btn) => !btn.getAttribute("aria-label"));
-    await user.click(thumbnails[1]); // second thumbnail → image 2
-    expect(screen.getByText("2 / 3")).toBeInTheDocument();
-  });
-
   it("renders thumbnail images for all provided images", () => {
     render(<TourGallery images={images} title="My Tour" />);
     expect(screen.getByAltText("Thumbnail 1")).toBeInTheDocument();
@@ -97,5 +109,33 @@ describe("TourGallery", () => {
     render(<TourGallery images={images} title="My Tour" />);
     await user.click(screen.getByRole("button", { name: /next image/i }));
     expect(screen.getByAltText("My Tour — photo 2")).toBeInTheDocument();
+  });
+
+  it("lightbox is hidden initially", () => {
+    render(<TourGallery images={images} title="My Tour" />);
+    expect(screen.queryByTestId("lightbox")).not.toBeInTheDocument();
+  });
+
+  it("opens the lightbox when the main image area is clicked", async () => {
+    const user = userEvent.setup();
+    render(<TourGallery images={images} title="My Tour" />);
+    const mainImage = screen.getByAltText("My Tour — photo 1");
+    await user.click(mainImage);
+    expect(screen.getByTestId("lightbox")).toBeInTheDocument();
+  });
+
+  it("closes the lightbox when the close button is clicked", async () => {
+    const user = userEvent.setup();
+    render(<TourGallery images={images} title="My Tour" />);
+    await user.click(screen.getByAltText("My Tour — photo 1"));
+    await user.click(screen.getByRole("button", { name: /close lightbox/i }));
+    expect(screen.queryByTestId("lightbox")).not.toBeInTheDocument();
+  });
+
+  it("arrow buttons do not open the lightbox", async () => {
+    const user = userEvent.setup();
+    render(<TourGallery images={images} title="My Tour" />);
+    await user.click(screen.getByRole("button", { name: /next image/i }));
+    expect(screen.queryByTestId("lightbox")).not.toBeInTheDocument();
   });
 });
