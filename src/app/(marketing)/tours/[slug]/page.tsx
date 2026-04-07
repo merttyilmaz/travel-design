@@ -1,4 +1,5 @@
 import { MapPin, Star, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { TourGallery } from "@/components/tour/tour-gallery";
@@ -18,11 +19,20 @@ export default function TourDetailPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-6">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-4">
-            <a href="/" className="hover:text-violet-500 transition-colors">Home</a>
+            <Link href="/" className="hover:text-violet-500 transition-colors">
+              Home
+            </Link>
             <ChevronRight className="w-3 h-3" />
-            <a href="/tours" className="hover:text-violet-500 transition-colors">Tours</a>
+            <Link
+              href="/tours"
+              className="hover:text-violet-500 transition-colors"
+            >
+              Tours
+            </Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-gray-600 font-medium truncate max-w-xs">{tour.title}</span>
+            <span className="text-gray-600 font-medium truncate max-w-xs">
+              {tour.title}
+            </span>
           </nav>
 
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">
@@ -45,8 +55,12 @@ export default function TourDetailPage() {
                   }`}
                 />
               ))}
-              <span className="text-sm font-semibold text-gray-800 ml-0.5">{tour.rating}.0</span>
-              <span className="text-sm text-gray-400">· {tour.reviewsCount} reviews</span>
+              <span className="text-sm font-semibold text-gray-800 ml-0.5">
+                {tour.rating}.0
+              </span>
+              <span className="text-sm text-gray-400">
+                · {tour.reviewsCount} reviews
+              </span>
             </div>
           </div>
         </div>
@@ -54,7 +68,6 @@ export default function TourDetailPage() {
 
       <main className="flex-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-
           {/* Hero: gallery + booking card */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
             <TourGallery images={tour.images} title={tour.title} />
@@ -83,7 +96,6 @@ export default function TourDetailPage() {
 
           {/* Similar tours — outside tabs */}
           <SimilarTours tours={similarTours} />
-
         </div>
       </main>
 

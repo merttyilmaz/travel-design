@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Star, ArrowRight } from "lucide-react";
 
@@ -23,13 +24,13 @@ export function SimilarTours({ tours }: SimilarToursProps) {
           <h2 className="text-xl font-bold text-gray-900">You Might Also Like</h2>
           <p className="text-sm text-gray-500 mt-0.5">Explore more curated tours</p>
         </div>
-        <a
+        <Link
           href="/tours"
           className="flex items-center gap-1.5 text-sm font-semibold text-violet-600 hover:text-violet-700 transition-colors"
         >
           View all
           <ArrowRight className="w-4 h-4" />
-        </a>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -38,7 +39,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
             ((tour.originalPrice - tour.price) / tour.originalPrice) * 100
           );
           return (
-            <a
+            <Link
               key={tour.slug}
               href={`/tours/${tour.slug}`}
               className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
@@ -91,7 +92,7 @@ export function SimilarTours({ tours }: SimilarToursProps) {
                   <span className="text-xs font-medium text-violet-600">/ person</span>
                 </div>
               </div>
-            </a>
+            </Link>
           );
         })}
       </div>

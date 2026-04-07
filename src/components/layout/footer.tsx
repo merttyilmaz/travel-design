@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import Link from "next/link";
 import { Logo } from "./logo";
 
 const footerLinks = {
@@ -118,12 +119,12 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {links.map(({ label, href }) => (
                   <li key={label}>
-                    <a
+                    <Link
                       href={href}
                       className="text-sm text-slate-400 hover:text-purple-400 transition-colors"
                     >
                       {label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

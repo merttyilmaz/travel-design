@@ -16,8 +16,8 @@ interface ReviewsProps {
   reviewsCount: number;
 }
 
-function Stars({ rating, size = "sm" }: { rating: number; size?: "sm" | "xs" }) {
-  const cls = size === "sm" ? "w-4 h-4" : "w-3 h-3";
+function Stars({ rating }: { rating: number }) {
+  const cls = "w-4 h-4";
   return (
     <div className="flex items-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (

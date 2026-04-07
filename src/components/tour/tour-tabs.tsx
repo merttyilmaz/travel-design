@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Check, X } from "lucide-react";
 import { Itinerary } from "./itinerary";
 import { Availability } from "./availability";
 import { Reviews } from "./reviews";
+import { ReviewsSkeleton } from "./reviews-skeleton";
 
 interface TourTabsProps {
   tour: {
@@ -47,11 +48,18 @@ const tabItems = (reviewsCount: number) => [
 
 export function TourTabs({ tour }: TourTabsProps) {
   const [activeTab, setActiveTab] = useState("overview");
+  const [reviewsLoaded, setReviewsLoaded] = useState(false);
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
     document.getElementById("tour-tabs-card")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (activeTab !== "reviews" || reviewsLoaded) return;
+    const timer = setTimeout(() => setReviewsLoaded(true), 1500);
+    return () => clearTimeout(timer);
+  }, [activeTab, reviewsLoaded]);
 
   return (
     // No overflow-hidden — would break sticky positioning of the tab header
@@ -158,11 +166,17 @@ export function TourTabs({ tour }: TourTabsProps) {
           </TabsContent>
 
           <TabsContent value="reviews" className="mt-0 focus-visible:ring-0 outline-none">
-            <Reviews
-              reviews={tour.reviews}
-              rating={tour.rating}
-              reviewsCount={tour.reviewsCount}
-            />
+            {reviewsLoaded ? (
+              <div className="animate-in fade-in duration-500">
+                <Reviews
+                  reviews={tour.reviews}
+                  rating={tour.rating}
+                  reviewsCount={tour.reviewsCount}
+                />
+              </div>
+            ) : (
+              <ReviewsSkeleton />
+            )}
           </TabsContent>
 
         </div>

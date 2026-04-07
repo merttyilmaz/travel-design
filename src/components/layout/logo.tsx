@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface LogoProps {
   dark?: boolean;
@@ -6,7 +7,7 @@ interface LogoProps {
 
 export function Logo({ dark = false }: LogoProps) {
   return (
-    <a href="/" className="shrink-0">
+    <Link href="/" className="shrink-0">
       <Image
         src="https://d2lpxiu1sq3srq.cloudfront.net/images/logo.svg"
         alt="HarmoniTravel"
@@ -15,6 +16,6 @@ export function Logo({ dark = false }: LogoProps) {
         unoptimized
         className={dark ? "brightness-0 invert" : ""}
       />
-    </a>
+    </Link>
   );
 }
