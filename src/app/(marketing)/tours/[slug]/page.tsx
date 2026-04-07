@@ -1,4 +1,5 @@
-import { MapPin, Star, ChevronRight } from "lucide-react";
+import { MapPin, ChevronRight } from "lucide-react";
+import { RatingButton } from "@/components/tour/rating-button";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { TourGallery } from "@/components/tour/tour-gallery";
@@ -37,24 +38,7 @@ export default function TourDetailPage() {
               <MapPin className="w-4 h-4 text-violet-500" />
               <span>{tour.location}</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < tour.rating
-                      ? "fill-amber-400 text-amber-400"
-                      : "fill-gray-200 text-gray-200"
-                  }`}
-                />
-              ))}
-              <span className="text-sm font-semibold text-gray-800 ml-0.5">
-                {tour.rating}.0
-              </span>
-              <span className="text-sm text-gray-400">
-                · {tour.reviewsCount} reviews
-              </span>
-            </div>
+            <RatingButton rating={tour.rating} reviewsCount={tour.reviewsCount} />
           </div>
         </div>
       </div>

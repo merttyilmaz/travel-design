@@ -19,6 +19,13 @@ interface BookingCardProps {
   reviewsCount: number;
 }
 
+function scrollToReviews() {
+  const el = document.getElementById("reviews");
+  if (!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - 128;
+  window.scrollTo({ top: y, behavior: "smooth" });
+}
+
 function scrollToAvailability() {
   const el = document.getElementById("availability");
   if (!el) return;
@@ -58,7 +65,11 @@ export function BookingCard({
         <p className="text-xs text-gray-500 mt-1">per person · taxes included</p>
 
         {/* Rating */}
-        <div className="flex items-center gap-1 mt-3">
+        <button
+          onClick={scrollToReviews}
+          className="flex items-center gap-1 mt-3 hover:opacity-80 transition-opacity cursor-pointer"
+          aria-label="Scroll to reviews"
+        >
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
@@ -69,7 +80,7 @@ export function BookingCard({
           ))}
           <span className="text-xs font-semibold text-gray-700 ml-1">{rating}.0</span>
           <span className="text-xs text-gray-500">· {reviewsCount} reviews</span>
-        </div>
+        </button>
       </div>
 
       <Separator />

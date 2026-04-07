@@ -30,6 +30,14 @@ export function MobileBookingBar({
   const { bookingOpen: open, openBooking, closeBooking } = useLayout();
   const [travelers, setTravelers] = useState(2);
 
+  function scrollToReviews() {
+    closeBooking();
+    const el = document.getElementById("reviews");
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 128;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+
   function scrollToAvailability() {
     closeBooking();
     const el = document.getElementById("availability");
@@ -112,7 +120,11 @@ export function MobileBookingBar({
                 -{discount}%
               </span>
             </div>
-            <div className="flex items-center gap-1 mt-2">
+            <button
+              onClick={scrollToReviews}
+              className="flex items-center gap-1 mt-2 hover:opacity-80 transition-opacity cursor-pointer"
+              aria-label="Scroll to reviews"
+            >
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
@@ -127,7 +139,7 @@ export function MobileBookingBar({
                 {rating}.0
               </span>
               <span className="text-xs text-gray-500">· {reviewsCount} reviews</span>
-            </div>
+            </button>
           </div>
 
           <Separator />

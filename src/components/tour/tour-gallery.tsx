@@ -51,7 +51,7 @@ export function TourGallery({ images, title }: TourGalleryProps) {
           fill
           className="object-cover transition-all duration-500"
           priority={activeIndex === 0}
-          loading={activeIndex === 0 ? "eager" : "lazy"}
+          loading="eager"
           sizes="(max-width: 768px) 100vw, 65vw"
         />
 

@@ -13,6 +13,7 @@ export function Logo({ dark = false }: LogoProps) {
         alt="HarmoniTravel"
         width={150}
         height={36}
+        style={{ height: "auto" }}
         unoptimized
         className={dark ? "brightness-0 invert" : undefined}
       />
